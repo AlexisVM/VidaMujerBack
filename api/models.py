@@ -5,9 +5,11 @@ from django.contrib.auth import authenticate, get_user_model
 User = get_user_model()
 
 class Tip(models.Model):
+	titulo = models.CharField(max_length=100,null=True, blank=True)
 	desc = models.TextField()
+	imagen = models.FileField(null=True, blank=True)
 
-class Conceptos(models.Model):
+class Concepto(models.Model):
 	titulo = models.CharField(max_length=100)
 	desc = models.TextField()
 	imagen = models.FileField()
