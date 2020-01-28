@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     'api'
 ]
 
+DJOSER = {
+    'SERIALIZERS': {
+       'user_create': 'api.serializers.UserCreateSerializerCustom',
+       },
+}
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
