@@ -8,6 +8,12 @@ class Tip(models.Model):
 	titulo = models.CharField(max_length=100,null=True, blank=True)
 	desc = models.TextField()
 	imagen = models.FileField(null=True, blank=True)
+	class Meta:
+		verbose_name_plural = "Tips"
+		verbose_name = "Tip"
+
+	def __str__(self):
+		return '%s' % (self.titulo)
 
 class Concepto(models.Model):
 	titulo = models.CharField(max_length=100)
