@@ -52,6 +52,7 @@ class Compra(models.Model):
 class Medicamento(models.Model):
 	nombre = models.CharField(max_length=100)
 	imagen = models.ImageField(upload_to='paquetes')
+	desc = models.TextField()
 	photo_thumbnail = ImageSpecField(source='imagen',
 									  processors=[ResizeToFill(250, 250)],
 									  format='JPEG',

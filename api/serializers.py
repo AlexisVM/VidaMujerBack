@@ -18,6 +18,19 @@ class UserCreateSerializerCustom(UserCreateSerializer):
 			)
 
 class TipsSerializer(serializers.ModelSerializer):
+	photo_thumbnail = serializers.ImageField(read_only=True)
 	class Meta:
 		model = Tip
-		fields = '__all__'
+		fields = ('titulo','desc','photo_thumbnail')
+		
+class MedicamentosSerializer(serializers.ModelSerializer):
+	photo_thumbnail = serializers.ImageField(read_only=True)
+	class Meta:
+		model = Medicamento
+		fields = ('nombre','desc','costo','photo_thumbnail')
+
+class ConceptosSerializer(serializers.ModelSerializer):
+	photo_thumbnail = serializers.ImageField(read_only=True)
+	class Meta:
+		model = Concepto
+		fields = ('titulo','desc','photo_thumbnail')

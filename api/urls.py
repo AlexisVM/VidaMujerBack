@@ -10,5 +10,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
 	path('auth/login/', TokenCreateView.as_view()),
 	path('auth/logout/', TokenDestroyView.as_view()),
-	path('tips/', TipsViewSet.as_view({'get':'list'}))
+	path('tips/', TipsViewSet.as_view({'get':'list'})),
+	path('meds/',MedicamentosViewSet.as_view({'get':'list'})),
+	path('conceptos/',ConceptosViewSet.as_view({'get':'list'}))
 	] + router.urls
