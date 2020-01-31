@@ -49,7 +49,7 @@ class FotoSerializer(serializers.ModelSerializer):
 		fields = ('experiencia','foto','photo_thumbnail')
 
 class ExperienciaSerializer(serializers.ModelSerializer):
-	fotos = FotoSerializer(many=True)
+	fotos = FotoSerializer(many=True,read_only=True)
 	username = serializers.CharField(source='usuario.username', read_only=True)
 	class Meta:
 		model = Experiencia
