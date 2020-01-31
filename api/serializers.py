@@ -74,8 +74,8 @@ class FotoSerializer(serializers.ModelSerializer):
 		model = Foto
 		fields = ('experiencia','foto','photo_thumbnail')
 	def to_representation(self, obj):
-		print(obj.photo_thumbnail)
-		return str(obj.foto)
+		request = self.context.get('request')
+		return str(request.build_absolute_uri(obj.foto.url))
 
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True,read_only=True)
