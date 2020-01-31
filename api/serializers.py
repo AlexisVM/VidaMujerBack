@@ -1,4 +1,4 @@
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer,UserSerializer
 from rest_framework import serializers
 from django.contrib.auth import  get_user_model
 from drf_extra_fields.fields import Base64ImageField
@@ -36,10 +36,36 @@ class ConceptosSerializer(serializers.ModelSerializer):
 		model = Concepto
 		fields = ('titulo','desc','photo_thumbnail')
 
+class VideoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Video
+		fields = '__all__'
+
+class PaqueteSerializer(serializers.ModelSerializer):
+	videos = VideoSerializer(many=True)
+	photo_thumbnail = serializers.ImageField(read_only=True)
+	class Meta:
+		model = Paquete
+		fields = ('titulo','desc','imagen','photo_thumbnail','consulta','costo','videos')
+
 class CompraSerializer(serializers.ModelSerializer):
+	paquete = PaqueteSerializer(many=False)
 	class Meta:
 		model = Compra
-		fields = 'all'
+		fields = ('id','usuario','fecha_de_pago','paquete')
+
+class MeSerializer(UserSerializer):
+	compras = CompraSerializer(many=True)
+	class Meta:
+			model = User
+			fields = tuple(User.REQUIRED_FIELDS) + (
+				"id",	
+				"email",
+				"username",
+				"first_name",
+				"last_name",
+				"compras"
+			)
 
 class FotoSerializer(serializers.ModelSerializer):
 	photo_thumbnail = serializers.ImageField(read_only=True)
@@ -47,6 +73,9 @@ class FotoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Foto
 		fields = ('experiencia','foto','photo_thumbnail')
+	def to_representation(self, obj):
+		print(obj.photo_thumbnail)
+		return str(obj.foto)
 
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True,read_only=True)

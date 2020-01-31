@@ -49,7 +49,7 @@ class Paquete(models.Model):
 class Video(models.Model):
 	titulo = models.CharField(max_length=100)
 	video = models.FileField()
-	paquete = models.ManyToManyField(Paquete)
+	paquete = models.ManyToManyField(Paquete,related_name='videos')
 
 	def __str__(self):
 		return '%s' % (self.titulo)
@@ -59,7 +59,7 @@ class Compra(models.Model):
 	('T','Transferencia'),
 	('E','Efectivo'),]
 	paquete = models.ForeignKey(Paquete, on_delete=models.SET_NULL, null=True)
-	usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+	usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='compras')
 	fecha_de_pago = models.DateTimeField()
 
 	def __str__(self):

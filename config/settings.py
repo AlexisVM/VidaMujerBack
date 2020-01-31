@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 DJOSER = {
     'SERIALIZERS': {
        'user_create': 'api.serializers.UserCreateSerializerCustom',
+       'current_user': 'api.serializers.MeSerializer',
        },
 }
 MIDDLEWARE = [
