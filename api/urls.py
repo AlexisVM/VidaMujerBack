@@ -6,7 +6,7 @@ from .views import *
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'experiencias', ExperienciaViewSet)
-
+router.register(r'fotos', FotoViewSet)
 urlpatterns = [
 	path('auth/login/', TokenCreateView.as_view()),
 	path('auth/logout/', TokenDestroyView.as_view()),

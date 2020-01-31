@@ -42,11 +42,11 @@ class CompraSerializer(serializers.ModelSerializer):
 		fields = 'all'
 
 class FotoSerializer(serializers.ModelSerializer):
-	photo_thumbnail = serializers.ImageField()
+	photo_thumbnail = serializers.ImageField(read_only=True)
 	foto = Base64ImageField()
 	class Meta:
 		model = Foto
-		fields = ('foto','photo_thumbnail')
+		fields = ('experiencia','foto','photo_thumbnail')
 
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True)

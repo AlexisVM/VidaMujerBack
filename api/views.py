@@ -16,6 +16,10 @@ class ConceptosViewSet(viewsets.ModelViewSet):
 	serializer_class = ConceptosSerializer
 	queryset = Concepto.objects.all()
 
+class FotoViewSet(viewsets.ModelViewSet):
+	serializer_class = FotoSerializer
+	queryset = Foto.objects.all()
+
 class ExperienciaViewSet(viewsets.ModelViewSet):
 	serializer_class = ExperienciaSerializer
 	queryset = Experiencia.objects.all()
