@@ -5,7 +5,7 @@ from djoser.views import *
 from .views import *
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-
+router.register(r'experiencias', ExperienciaViewSet)
 
 urlpatterns = [
 	path('auth/login/', TokenCreateView.as_view()),

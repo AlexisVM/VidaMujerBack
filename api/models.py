@@ -63,7 +63,7 @@ class Compra(models.Model):
 	fecha_de_pago = models.DateTimeField()
 
 	def __str__(self):
-		return '%s' % (self.titulo)
+		return 'Usuario: %s Paquete: %s' % (self.usuario, self.paquete)
 
 class Medicamento(models.Model):
 	nombre = models.CharField(max_length=100)
@@ -76,3 +76,24 @@ class Medicamento(models.Model):
 	costo = models.PositiveSmallIntegerField()
 	def __str__(self):
 		return '%s' % (self.nombre)
+
+class Experiencia(models.Model):
+	usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+	titulo = models.CharField(max_length=100)
+	desc = models.TextField()
+	def __str__(self):
+		return '%s por %s' % (self.titulo, self.usuario)
+
+class Foto(models.Model):
+	foto = models.ImageField(upload_to='experiencias')
+	photo_thumbnail = ImageSpecField(source='foto',
+									  processors=[ResizeToFill(250, 250)],
+									  format='JPEG',
+									  options={'quality': 60})
+	experiencia = models.ForeignKey(Experiencia, on_delete=models.SET_NULL, null=True,related_name='fotos')
+	
+	class Meta:
+		verbose_name_plural = "Fotos"
+
+	def __str__(self):
+		return '%s' % (self.experiencia)

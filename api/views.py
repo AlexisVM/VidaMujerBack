@@ -15,3 +15,7 @@ class MedicamentosViewSet(viewsets.ModelViewSet):
 class ConceptosViewSet(viewsets.ModelViewSet):
 	serializer_class = ConceptosSerializer
 	queryset = Concepto.objects.all()
+
+class ExperienciaViewSet(viewsets.ModelViewSet):
+	serializer_class = ExperienciaSerializer
+	queryset = Experiencia.objects.all()
