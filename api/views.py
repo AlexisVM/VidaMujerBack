@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, filters
 from .serializers import *
 from .models import *
 
@@ -20,6 +20,15 @@ class FotoViewSet(viewsets.ModelViewSet):
 	serializer_class = FotoSerializer
 	queryset = Foto.objects.all()
 
+
 class ExperienciaViewSet(viewsets.ModelViewSet):
 	serializer_class = ExperienciaSerializer
 	queryset = Experiencia.objects.all()
+	filter_backends = (filters.OrderingFilter,)
+	filter_mappings = {
+        'fecha': 'fecha',
+    }
+
+class PaqueteViewSet(viewsets.ModelViewSet):
+	serializer_class = ExperienciaSerializer
+	queryset = Paquete.objects.all()

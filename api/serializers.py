@@ -69,17 +69,17 @@ class MeSerializer(UserSerializer):
 
 class FotoSerializer(serializers.ModelSerializer):
 	photo_thumbnail = serializers.ImageField(read_only=True)
-	foto = Base64ImageField()
+	uri = Base64ImageField()
 	class Meta:
 		model = Foto
-		fields = ('experiencia','foto','photo_thumbnail')
+		fields = ('experiencia','uri','photo_thumbnail')
 	def to_representation(self, obj):
 		request = self.context.get('request')
-		return str(request.build_absolute_uri(obj.foto.url))
+		return str(request.build_absolute_uri(obj.uri.url))
 
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True,read_only=True)
 	username = serializers.CharField(source='usuario.username', read_only=True)
 	class Meta:
 		model = Experiencia
-		fields = ('id','usuario','username','titulo','desc','fotos')
+		fields = ('id','fecha','usuario','username','titulo','desc','fotos')

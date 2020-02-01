@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import authenticate, get_user_model
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from django.utils import timezone
+
 
 User = get_user_model()
 
@@ -81,12 +83,13 @@ class Experiencia(models.Model):
 	usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 	titulo = models.CharField(max_length=100)
 	desc = models.TextField()
+	fecha = models.DateTimeField(	default=timezone.now)
 	def __str__(self):
 		return '%s por %s' % (self.titulo, self.usuario)
 
 class Foto(models.Model):
-	foto = models.ImageField(upload_to='experiencias')
-	photo_thumbnail = ImageSpecField(source='foto',
+	uri = models.ImageField(upload_to='experiencias')
+	photo_thumbnail = ImageSpecField(source='uri',
 									  processors=[ResizeToFill(250, 250)],
 									  format='JPEG',
 									  options={'quality': 60})
