@@ -13,5 +13,7 @@ urlpatterns = [
 	path('auth/logout/', TokenDestroyView.as_view()),
 	path('tips/', TipsViewSet.as_view({'get':'list'})),
 	path('meds/',MedicamentosViewSet.as_view({'get':'list'})),
-	path('conceptos/',ConceptosViewSet.as_view({'get':'list'}))
+	path('conceptos/',ConceptosViewSet.as_view({'get':'list'})),
+	path('comprobantes/', ComprobanteViewSet.as_view({'post':'create'})),
+	path('compras/',CompraViewSet.as_view({'post':'create'})),
 	] + router.urls

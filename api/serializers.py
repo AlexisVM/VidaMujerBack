@@ -48,11 +48,18 @@ class PaqueteSerializer(serializers.ModelSerializer):
 		model = Paquete
 		fields = ('id','titulo','desc','imagen','photo_thumbnail','consulta','costo','videos')
 
+class ComprobanteSerializer(serializers.ModelSerializer):
+	uri = Base64ImageField()
+	class Meta:
+		model = Comprobante
+		fields = '__all__'
+
 class CompraSerializer(serializers.ModelSerializer):
-	paquete = PaqueteSerializer(many=False)
+	#paquete = PaqueteSerializer(many=False)
+
 	class Meta:
 		model = Compra
-		fields = ('id','usuario','fecha_de_pago','paquete')
+		fields = ('id','usuario','paquete')
 
 class MeSerializer(UserSerializer):
 	compras = CompraSerializer(many=True)
@@ -80,7 +87,7 @@ class FotoSerializer(serializers.ModelSerializer):
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True,read_only=True)
 	username = serializers.CharField(source='usuario.username', read_only=True)
-	fecha = serializers.DateField(read_only=True)
+	fecha = serializers.DateTimeField(read_only=True)
 	class Meta:
 		model = Experiencia
 		fields = ('id','fecha','usuario','username','titulo','desc','fotos')
