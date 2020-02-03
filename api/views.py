@@ -26,9 +26,16 @@ class ExperienciaViewSet(viewsets.ModelViewSet):
 	queryset = Experiencia.objects.all()
 	filter_backends = (filters.OrderingFilter,)
 	filter_mappings = {
-        'fecha': 'fecha',
-    }
+		'fecha': 'fecha',
+	}
 
 class PaqueteViewSet(viewsets.ModelViewSet):
-	serializer_class = ExperienciaSerializer
+	serializer_class = PaqueteSerializer
 	queryset = Paquete.objects.all()
+	def get_queryset(self):
+		user = self.request.user
+		auth = self.request.auth
+		if auth:
+			return Paquete.objects.all().difference(Paquete.objects.filter(usuarios=user))
+		else:
+			return Paquete.objects.all()

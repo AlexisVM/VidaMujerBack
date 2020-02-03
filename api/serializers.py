@@ -46,7 +46,7 @@ class PaqueteSerializer(serializers.ModelSerializer):
 	photo_thumbnail = serializers.ImageField(read_only=True)
 	class Meta:
 		model = Paquete
-		fields = ('titulo','desc','imagen','photo_thumbnail','consulta','costo','videos')
+		fields = ('id','titulo','desc','imagen','photo_thumbnail','consulta','costo','videos')
 
 class CompraSerializer(serializers.ModelSerializer):
 	paquete = PaqueteSerializer(many=False)
@@ -80,6 +80,7 @@ class FotoSerializer(serializers.ModelSerializer):
 class ExperienciaSerializer(serializers.ModelSerializer):
 	fotos = FotoSerializer(many=True,read_only=True)
 	username = serializers.CharField(source='usuario.username', read_only=True)
+	fecha = serializers.DateField(read_only=True)
 	class Meta:
 		model = Experiencia
 		fields = ('id','fecha','usuario','username','titulo','desc','fotos')
