@@ -22,7 +22,7 @@ class TipsSerializer(serializers.ModelSerializer):
 	photo_thumbnail = serializers.ImageField(read_only=True)
 	class Meta:
 		model = Tip
-		fields = ('titulo','desc','photo_thumbnail')
+		fields = ('titulo','desc','imagen','photo_thumbnail')
 
 class MedicamentosSerializer(serializers.ModelSerializer):
 	photo_thumbnail = serializers.ImageField(read_only=True)
