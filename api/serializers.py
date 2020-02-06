@@ -55,7 +55,7 @@ class ComprobanteSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class CompraSerializer(serializers.ModelSerializer):
-	#paquete = PaqueteSerializer(many=False)
+	paquete = PaqueteSerializer(many=False, read_only=True)
 
 	class Meta:
 		model = Compra
