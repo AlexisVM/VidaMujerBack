@@ -55,14 +55,19 @@ class ComprobanteSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class CompraSerializer(serializers.ModelSerializer):
-	paquete = PaqueteSerializer(many=False, read_only=True)
+	#paquete = PaqueteSerializer(many=False, read_only=True)
 
+	class Meta:
+		model = Compra
+		fields = ('id','usuario','paquete')
+class CompraMeSerializer(serializers.ModelSerializer):
+	paquete = PaqueteSerializer(many=False, read_only=True)
 	class Meta:
 		model = Compra
 		fields = ('id','usuario','paquete')
 
 class MeSerializer(UserSerializer):
-	compras = CompraSerializer(many=True)
+	compras = CompraMeSerializer(many=True)
 	class Meta:
 			model = User
 			fields = tuple(User.REQUIRED_FIELDS) + (
