@@ -61,7 +61,7 @@ class CompraMeSerializer(serializers.ModelSerializer):
 	paquete = PaqueteSerializer(many=False, read_only=True)
 	class Meta:
 		model = Compra
-		fields = ('id','usuario','paquete','aprobada')
+		fields = ('id','usuario','paquete','aprobada','uri')
 
 class MeSerializer(UserSerializer):
 	compras = CompraMeSerializer(many=True)
