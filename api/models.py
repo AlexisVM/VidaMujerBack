@@ -61,19 +61,13 @@ class Compra(models.Model):
 	('T','Transferencia'),
 	('E','Efectivo'),]
 	paquete = models.ForeignKey(Paquete, on_delete=models.SET_NULL, null=True)
+	uri = models.ImageField(upload_to='paquetes',null=True,blank=True)
 	usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='compras')
 	fecha_de_pago = models.DateTimeField(default=timezone.now)
 	aprobada = models.BooleanField(default=False)
 	def __str__(self):
 		return 'Usuario: %s Paquete: %s' % (self.usuario, self.paquete)
 
-class Comprobante(models.Model):
-	compra = models.ForeignKey(Compra, on_delete=models.SET_NULL, null=True)
-	uri = models.ImageField()
-	photo_thumbnail = ImageSpecField(source='uri',
-									  processors=[ResizeToFill(250, 250)],
-									  format='JPEG',
-									  options={'quality': 60})
 class Medicamento(models.Model):
 	nombre = models.CharField(max_length=100)
 	imagen = models.ImageField(upload_to='paquetes')
