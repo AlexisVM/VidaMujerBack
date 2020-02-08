@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.widgets import AdminFileWidget
 from django.db.models import Q
 from .models import *
 
@@ -21,8 +22,17 @@ class UriComprobante(admin.SimpleListFilter):
 		if self.value() == 'V':
 			return queryset.filter(Q(uri__isnull=True) | Q(uri__exact=''))
 
+#Widgets
+
+class AdminImagePdfWidget(AdminFileWidget):
+    template_name = 'admin/widgets/image_field_preview.html'
+
 #AdminModels
 class CompraModelAdmin(admin.ModelAdmin):
+	formfield_overrides = {
+		models.FileField: {'widget': AdminImagePdfWidget},
+		models.ImageField: {'widget': AdminImagePdfWidget},
+	}
 	list_display =('usuario','paquete','aprobada')
 	list_filter = ('aprobada',UriComprobante)
 # Register your models here.
