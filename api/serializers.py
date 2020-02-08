@@ -52,7 +52,7 @@ class PaqueteSerializer(serializers.ModelSerializer):
 
 class CompraSerializer(serializers.ModelSerializer):
 	#paquete = PaqueteSerializer(many=False, read_only=True)
-	uri = Base64ImageField()
+	uri = Base64ImageField(	required=False)
 	class Meta:
 		model = Compra
 		fields = ('id','usuario','paquete','uri')
