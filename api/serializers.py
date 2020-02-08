@@ -48,7 +48,11 @@ class PaqueteSerializer(serializers.ModelSerializer):
 		model = Paquete
 		fields = ('id','titulo','desc','imagen','photo_thumbnail','consulta','costo','videos')
 
-
+class ComprobanteSerializer(serializers.ModelSerializer):
+	uri = Base64ImageField()
+	class Meta:
+		model = Comprobante
+		fields = '__all__'
 
 class CompraSerializer(serializers.ModelSerializer):
 	#paquete = PaqueteSerializer(many=False, read_only=True)
